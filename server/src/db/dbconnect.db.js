@@ -2,13 +2,11 @@ import mongoose from "mongoose";
 
 const connectdb = async () => {
   try {
-    if (process.env.Host == "localhost") {
+    if (process.env.ENV == "localhost") {
       const mongoDBInstance = await mongoose.connect(
         `${process.env.MongoDB_URI}/${process.env.DB_NAME}`
       );
     } else {
-      console.log("else runn");
-
       const mongoDBInstance = await mongoose.connect(
         `${process.env.MongoDB_URI_Full}`
       );
