@@ -2,14 +2,17 @@ import mongoose from "mongoose";
 
 const connectdb = async () => {
   try {
-    // const conn = await mongoose.connect(process.env.MONGODB_URI, {
-    //   useNewUrlParser: true,
-    //   useUnifiedTopology: true,
-    // });
-    // THis is for localhost
-    const mongoDBInstance = await mongoose.connect(
-      `${process.env.MongoDB_URI}/${process.env.DB_NAME}`
-    );
+    if (process.env.Host == "localhost") {
+      const mongoDBInstance = await mongoose.connect(
+        `${process.env.MongoDB_URI}/${process.env.DB_NAME}`
+      );
+    } else {
+      console.log("else runn");
+
+      const mongoDBInstance = await mongoose.connect(
+        `${process.env.MongoDB_URI_Full}`
+      );
+    }
 
     console.log("🚀MongoDB connected successfully !!!");
   } catch (err) {
